@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "organization": "WordPress Performance Community",
+  "date": "January 2026",
+  "abstract": "Comprehensive performance optimization guide for WordPress development, designed for AI agents and LLMs assisting developers. This document covers database optimization, caching strategies, asset management, theme development, plugin architecture, media handling, API optimization, and advanced performance patterns. Rules are based on WordPress VIP coding standards, 10up engineering best practices, and official WordPress developer documentation. Each rule includes impact assessment, clear explanations, and practical code examples demonstrating both anti-patterns and recommended implementations.",
+  "references": [
+    "https://developer.wordpress.org/",
+    "https://developer.wordpress.org/coding-standards/",
+    "https://docs.wpvip.com/",
+    "https://github.com/Automattic/VIP-Coding-Standards",
+    "https://github.com/WordPress/WordPress-Coding-Standards",
+    "https://developer.wordpress.org/apis/transients/",
+    "https://developer.wordpress.org/plugins/",
+    "https://developer.wordpress.org/themes/",
+    "https://developer.wordpress.org/rest-api/",
+    "https://10up.github.io/Engineering-Best-Practices/"
+  ]
+}
