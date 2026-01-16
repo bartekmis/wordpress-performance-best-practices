@@ -1,5 +1,7 @@
 # WordPress Performance Best Practices
 
+Created by [WOW - Wielka Optymalizacja WordPressa](https://www.wielkaoptymalizacjawordpressa.pl/), Bartek Miś
+
 A comprehensive performance optimization guide for WordPress development, designed for AI agents and LLMs assisting developers.
 
 ## Overview
