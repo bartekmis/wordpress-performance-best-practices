@@ -4,6 +4,16 @@ Created by [WOW - Wielka Optymalizacja WordPressa](https://www.wielkaoptymalizac
 
 A comprehensive performance optimization guide for WordPress development, designed for AI agents and LLMs assisting developers.
 
+## How to Use
+
+Install the skill in Claude Code:
+
+```bash
+npx add-skill bartekmis/wordpress-performance-best-practises
+```
+
+Once installed, Claude will automatically apply these performance guidelines when working with WordPress code.
+
 ## Overview
 
 This project provides a curated set of performance rules for WordPress development based on:
