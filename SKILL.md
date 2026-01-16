@@ -1,91 +1,115 @@
-# WordPress Performance Best Practices Skill
+---
+name: wordpress-performance-best-practices
+description: WordPress performance optimization guidelines for plugin, theme, and custom code development. This skill should be used when writing, reviewing, or refactoring WordPress PHP code to ensure optimal performance patterns. Triggers on tasks involving WP_Query, database queries, caching, hooks, REST API, or WordPress theme/plugin development.
+license: MIT
+metadata:
+  author: bartekmis
+  version: "1.0.0"
+---
 
-## Metadata
+# WordPress Performance Best Practices
 
-- **Name:** wordpress-performance-best-practices
-- **Version:** 1.0.0
-- **Description:** Performance optimization guidelines for WordPress development
-- **Author:** WordPress Performance Community
+Comprehensive performance optimization guide for WordPress development, designed for AI agents and LLMs. Contains 34 rules across 8 categories, prioritized by impact to guide code review and generation.
 
-## Trigger Conditions
+## When to Apply
 
-This skill should be activated when:
+Reference these guidelines when:
+- Writing WordPress plugins or themes
+- Working with WP_Query or database operations
+- Implementing caching (transients, object cache)
+- Optimizing asset loading (scripts, styles)
+- Reviewing WordPress code for performance issues
+- Working with REST API or AJAX handlers
 
-1. Writing or reviewing WordPress PHP code
-2. Working with WordPress themes or plugins
-3. Optimizing WordPress database queries
-4. Implementing caching in WordPress
-5. Working with WordPress REST API or AJAX
-6. Handling media uploads in WordPress
-7. Reviewing WordPress code for performance issues
+## Rule Categories by Priority
 
-## Keywords
+| Priority | Category | Impact | Prefix |
+|----------|----------|--------|--------|
+| 1 | Database Optimization | CRITICAL | `db-` |
+| 2 | Caching Strategies | CRITICAL | `cache-` |
+| 3 | Asset Management | HIGH | `asset-` |
+| 4 | Theme Performance | HIGH | `theme-` |
+| 5 | Plugin Architecture | MEDIUM-HIGH | `plugin-` |
+| 6 | Media Optimization | MEDIUM | `media-` |
+| 7 | API and AJAX | MEDIUM | `api-` |
+| 8 | Advanced Patterns | LOW-MEDIUM | `advanced-` |
 
-- WordPress
-- WP_Query
-- wpdb
-- transients
-- object cache
-- wp_enqueue_script
-- wp_enqueue_style
-- add_action
-- add_filter
-- plugin development
-- theme development
-- REST API
-- admin-ajax
-- wp-cron
+## Quick Reference
 
-## Instructions for Agents
+### 1. Database Optimization (CRITICAL)
 
-When this skill is active:
+- `db-prepared-statements` - Always use $wpdb->prepare() for queries
+- `db-avoid-post-not-in` - Avoid post__not_in, filter in PHP instead
+- `db-use-wp-query` - Use WP_Query/get_posts instead of direct DB queries
+- `db-limit-query-results` - Never use posts_per_page => -1
+- `db-meta-query-indexing` - Optimize meta queries, consider taxonomies
+- `db-fields-optimization` - Use fields => 'ids' when only IDs needed
 
-1. **Review code against rules**: Check code for violations of the performance rules in AGENTS.md
-2. **Suggest improvements**: When violations are found, suggest the correct implementation
-3. **Explain impact**: Communicate the performance impact of violations
-4. **Prioritize by impact**: Address CRITICAL and HIGH impact issues first
-5. **Consider context**: Some rules may not apply in all situations
+### 2. Caching Strategies (CRITICAL)
 
-## Rule Categories
+- `cache-transients-proper-use` - Use transients for external API calls
+- `cache-object-cache` - Use wp_cache_* with cache groups
+- `cache-remote-requests` - Always cache wp_remote_get responses
+- `cache-invalidation` - Implement precise, event-driven invalidation
+- `cache-fragment-caching` - Cache expensive template fragments
 
-| Priority | Section | When to Check |
-|----------|---------|---------------|
-| 1 | Database Optimization | Any `$wpdb` usage, WP_Query, get_posts() |
-| 2 | Caching Strategies | Data fetching, API calls, expensive computations |
-| 3 | Asset Management | wp_enqueue_script/style, frontend code |
-| 4 | Theme Performance | Template files, theme functions |
-| 5 | Plugin Architecture | Plugin code, hooks, activation |
-| 6 | Media Optimization | Image handling, uploads, galleries |
-| 7 | API and AJAX | REST endpoints, admin-ajax handlers |
-| 8 | Advanced Patterns | High-traffic optimizations, cron, autoload |
+### 3. Asset Management (HIGH)
 
-## Integration
+- `asset-proper-enqueue` - Use wp_enqueue_script/style, never hardcode
+- `asset-conditional-loading` - Only load assets where needed
+- `asset-defer-async` - Use defer/async for non-critical scripts
+- `asset-dequeue-unused` - Remove unused plugin assets
+- `asset-minification` - Minify assets, use critical CSS
 
-### Claude Code
+### 4. Theme Performance (HIGH)
 
-Add to your project's `CLAUDE.md`:
+- `theme-avoid-queries-in-templates` - Keep queries out of template files
+- `theme-template-parts` - Use get_template_part with data passing
+- `theme-loop-optimization` - Optimize loops, use meta/term cache priming
+- `theme-hooks-placement` - Use appropriate hook priorities
 
-```markdown
-When working with WordPress code, follow the rules in:
-/path/to/wordpress-performance-best-practices/AGENTS.md
+### 5. Plugin Architecture (MEDIUM-HIGH)
+
+- `plugin-conditional-loading` - Load code only when needed
+- `plugin-autoloading` - Use PSR-4 autoloading
+- `plugin-activation-hooks` - Use activation hooks for setup tasks
+- `plugin-hook-removal` - Remove hooks properly with matching priority
+
+### 6. Media Optimization (MEDIUM)
+
+- `media-responsive-images` - Use srcset and sizes attributes
+- `media-lazy-loading` - Lazy load below-fold, eager load LCP
+- `media-image-sizes` - Define appropriate custom image sizes
+
+### 7. API and AJAX (MEDIUM)
+
+- `api-rest-optimization` - Optimize REST endpoints, add caching headers
+- `api-admin-ajax` - Use REST API for frontend, avoid admin-ajax
+- `api-nonce-validation` - Implement proper nonce validation
+
+### 8. Advanced Patterns (LOW-MEDIUM)
+
+- `advanced-autoload-optimization` - Keep autoloaded options under 800KB
+- `advanced-cron-optimization` - Use system cron, batch long tasks
+- `advanced-memory-management` - Process in batches, clean up memory
+- `advanced-query-monitor` - Profile before optimizing
+
+## How to Use
+
+Read individual rule files for detailed explanations and code examples:
+
+```
+rules/db-prepared-statements.md
+rules/cache-transients-proper-use.md
+rules/_sections.md
 ```
 
-### Other AI Agents
+Each rule file contains:
+- Brief explanation of why it matters
+- Incorrect code example with explanation
+- Correct code example with explanation
+- Additional context and references
 
-Include the contents of `AGENTS.md` in your system prompt or context when working with WordPress projects.
+## Full Compiled Document
 
-## Example Usage
-
-### Code Review Prompt
-
-```
-Review this WordPress code for performance issues using the WordPress Performance Best Practices rules:
-
-[code here]
-```
-
-### Implementation Prompt
-
-```
-Implement [feature] in WordPress following the WordPress Performance Best Practices, particularly the caching and database optimization rules.
-```
+For the complete guide with all rules expanded: `AGENTS.md`
