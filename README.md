@@ -9,7 +9,7 @@ A comprehensive performance optimization guide for WordPress development, design
 Install the skill in Claude Code:
 
 ```bash
-npx add-skill bartekmis/wordpress-performance-best-practises
+npx add-skill bartekmis/wordpress-performance-best-practices
 ```
 
 Once installed, Claude will automatically apply these performance guidelines when working with WordPress code.
